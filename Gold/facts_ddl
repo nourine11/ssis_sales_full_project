@@ -1,0 +1,44 @@
+
+if object_id ('gold.fact_payments','U')is not null
+drop table gold.fact_payments
+
+create table gold.fact_payments 
+(
+payment_key int identity(1,1) primary key,
+order_id varchar(50),
+payment_sequential int ,
+payment_type nvarchar(50) ,
+payment_installments int,
+payment_value decimal(15,2),
+customer_id varchar(50),
+date_key int
+);
+
+select * from gold.fact_payments
+
+
+if object_id ('gold.fact_order_lifecycle','U')is not null
+drop table gold.fact_order_lifecycle
+create table gold.fact_order_lifecycle
+(
+order_lifecycle_sk int identity(1,1) primary key,
+order_id varchar(50),
+order_item_id varchar(100),
+product_id varchar(50) ,
+customer_id varchar(50) ,
+seller_id varchar(50) ,
+review_id varchar(50) ,
+order_status nvarchar(50),
+date_key int,
+price decimal(15,2),
+shipping_limit_date datetime,
+order_approved_at datetime,
+order_delivered_carrier_date datetime,
+order_delivered_customer_date datetime,
+order_estimated_delivery_date datetime,
+order_purchase_timestamp datetime,
+freight_value decimal(15,2),
+total_order_price decimal(20,2)
+);
+
+select * from gold.fact_order_lifecycle
