@@ -1,0 +1,32 @@
+select count(*) from bronze.olist_customers 
+
+select count(*) from bronze.olist_geolocation 
+
+select count(*)from bronze.product_category_name_translation 
+
+select count(*) from bronze.olist_sellers 
+
+select count(*) from bronze.olist_products 
+
+select count(*) from bronze.olist_orders 
+
+select count(*) from bronze.olist_order_items 
+
+select count(*) from bronze.olist_order_payments 
+
+select count(*) from bronze.olist_order_reviews 
+
+truncate table  bronze.olist_order_items;
+truncate table bronze.olist_order_payments;
+truncate table bronze.olist_order_reviews;
+
+truncate table bronze.olist_orders;
+
+truncate table bronze.olist_customers;
+truncate table bronze.olist_sellers;
+
+truncate table bronze.olist_products;
+
+truncate table bronze.product_category_name_translation;
+
+truncate table bronze.olist_geolocation
