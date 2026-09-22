@@ -1,0 +1,17 @@
+select count(*) from gold.dim_customer
+select count(*) from gold.dim_products
+select count(*)from gold.dim_orders
+select count(*) from gold.dim_sellers
+select count(*) from gold.DIM_Date
+
+select * from gold.fact_payments
+select * from gold.fact_order_lifecycle
+
+
+truncate table gold.dim_customer
+truncate table gold.dim_products
+truncate table gold.dim_orders
+truncate table gold.dim_sellers
+truncate table gold.DIM_Date
+truncate table gold.fact_payments
+truncate table gold.fact_order_lifecycle
