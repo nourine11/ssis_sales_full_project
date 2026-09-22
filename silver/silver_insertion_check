@@ -1,0 +1,40 @@
+select count(*) from silver.olist_customers 
+
+select count(*) from silver.olist_geolocation 
+
+select count(*)from silver.product_category_name_translation 
+
+select count(*) from silver.olist_sellers 
+
+select count(*) from silver.olist_products 
+
+select count(*) from bronze.products_errors
+
+select count(*) from silver.olist_orders 
+
+select count(*) from bronze.olist_orders_errors
+
+select count(*) from silver.olist_order_items 
+
+select count(*) from silver.olist_order_payments 
+
+select count(*) from silver.olist_order_reviews 
+
+select count(*) from bronze.olist_order_reviews_errors 
+
+
+truncate table silver.olist_customers 
+truncate table silver.olist_geolocation 
+truncate table silver.product_category_name_translation 
+truncate table silver.olist_sellers
+truncate table silver.olist_products 
+truncate table bronze.products_errors
+truncate table silver.olist_orders
+truncate table bronze.olist_orders_errors
+truncate table silver.olist_order_items 
+truncate table silver.olist_order_payments
+truncate table silver.olist_order_reviews 
+truncate table bronze.olist_order_reviews_errors 
+
+
+
