@@ -1,0 +1,335 @@
+--check bronze.product_category_name_translation
+select * from bronze.product_category_name_translation
+
+select product_category_name  from bronze.product_category_name_translation
+where product_category_name is null
+
+select product_category_name_english   from bronze.product_category_name_translation
+where product_category_name_english  is null
+
+select product_category_name ,product_category_name_english from bronze.product_category_name_translation
+where product_category_name != trim(product_category_name )or
+      product_category_name_english !=trim(product_category_name_english )
+
+select product_category_name , count(*) from bronze.product_category_name_translation
+group by product_category_name 
+having count(*)>1 or product_category_name is null
+
+select product_category_name_english , count(*) from bronze.product_category_name_translation
+group by product_category_name_english 
+having count(*)>1 or product_category_name_english is null
+--********************************************************************************************************************************************************
+  --check from bronze.olist_customers
+select * from bronze.olist_customers
+--check nulls of customer_id or duplicates
+select customer_id,count(*) from bronze.olist_customers
+group by customer_id 
+having count(*) >1 or customer_id is null
+
+select customer_unique_id from bronze.olist_customers
+where customer_unique_id is null
+
+select customer_zip_code_prefix from bronze.olist_customers
+where customer_zip_code_prefix is null
+
+select customer_city from bronze.olist_customers
+where customer_city is null
+
+select customer_state from bronze.olist_customers
+where customer_state is null
+
+select customer_id , customer_unique_id,customer_zip_code_prefix,customer_city,customer_state from bronze.olist_customers
+where customer_id != trim(customer_id) or 
+      customer_unique_id != trim(customer_unique_id) or
+      customer_zip_code_prefix != trim(customer_zip_code_prefix) or
+      customer_city != trim(customer_city) or
+      customer_state != trim(customer_state)
+
+select distinct customer_state from bronze.olist_customers
+
+--*******************************************************************************************************************************************
+  --check bronze.olist_geolocation
+select * from bronze.olist_geolocation
+--check nulls of customer_id or duplicates
+select geolocation_zip_code_prefix,count(*) from bronze.olist_geolocation
+group by geolocation_zip_code_prefix
+having count(*) >1 or geolocation_zip_code_prefix is null
+
+select geolocation_lat from bronze.olist_geolocation
+where geolocation_lat is null
+
+select  geolocation_lng from bronze.olist_geolocation
+where geolocation_lng is null
+
+select geolocation_city from bronze.olist_geolocation
+where geolocation_city is null
+
+select geolocation_state from bronze.olist_geolocation
+where geolocation_state is null
+
+
+select geolocation_zip_code_prefix,geolocation_city,geolocation_state from bronze.olist_geolocation
+where geolocation_zip_code_prefix!= trim(geolocation_zip_code_prefix) or 
+      geolocation_city != trim(geolocation_city) or
+      geolocation_state != trim(geolocation_state) 
+
+select distinct geolocation_state from bronze.olist_geolocation
+
+select geolocation_lat from bronze.olist_geolocation 
+where geolocation_lat > 90 or geolocation_lat < -90
+
+select geolocation_lng from bronze.olist_geolocation 
+where geolocation_lng > 180 or geolocation_lng < -180
+
+--***************************************************************************************************************************************************
+  --check bronze.olist_order_items
+  select * from bronze.olist_order_items
+
+select order_id,count(*) from bronze.olist_order_items
+group by order_id
+having count(*)>1 or order_id is null 
+
+select order_item_id from bronze.olist_order_items
+where order_item_id is null
+
+select product_id from bronze.olist_order_items
+where product_id is null
+
+select seller_id from bronze.olist_order_items
+where seller_id is null
+
+select shipping_limit_date from bronze.olist_order_items
+where shipping_limit_date is null
+
+select price from bronze.olist_order_items
+where price is null
+
+select freight_value from bronze.olist_order_items
+where freight_value is null
+
+select order_id , product_id,seller_id from bronze.olist_order_items
+where order_id !=trim(order_id)or
+      product_id!=trim(product_id) or
+      seller_id!=trim(seller_id)
+
+SELECT -- check pk duplicates 
+    order_id,
+    order_item_id,
+    COUNT(*) AS duplicate_count
+FROM bronze.olist_order_items
+GROUP BY
+    order_id,
+  order_item_id
+HAVING COUNT(*) > 1;
+
+--****************************************************************************************************************************************
+--check bronze.olist_order_reviews
+  select * from bronze.olist_order_reviews
+
+select review_id,count(*) from bronze.olist_order_reviews
+group by review_id
+having count(*)>1 or review_id is null
+
+select order_id from bronze.olist_order_reviews
+where order_id is null
+
+select review_score from bronze.olist_order_reviews
+where review_score is null
+
+select review_comment_title from bronze.olist_order_reviews
+where review_comment_title is null --nulls
+
+select review_comment_message from bronze.olist_order_reviews --nulls
+where review_comment_message is null
+
+select review_creation_date from bronze.olist_order_reviews 
+where review_creation_date is null
+
+select review_answer_timestamp from bronze.olist_order_reviews
+where review_answer_timestamp is null
+
+
+select order_id , review_id from bronze.olist_order_reviews --trim order_id and review_id
+where order_id !=trim(order_id)or
+      review_id!=trim(review_id) or
+      review_comment_title!=trim(review_comment_title)or
+      review_comment_message!=trim(review_comment_message)
+
+SELECT -- check pk duplicates 
+    order_id,
+    review_id,
+    COUNT(*) AS duplicate_count
+FROM bronze.olist_order_reviews
+GROUP BY
+    order_id,
+   review_id
+HAVING COUNT(*) > 1;
+
+select * from silver.olist_order_reviews
+
+--************************************************************************************************************************************************
+  --check bronze.olist_orders
+  select * from bronze.olist_orders
+
+select order_id,count(*) from bronze.olist_orders
+group by order_id
+having count(*)>1 or order_id is null 
+
+select customer_id from bronze.olist_orders
+where customer_id is null
+
+select order_status from bronze.olist_orders
+where order_status is null
+
+select order_purchase_timestamp from bronze.olist_orders
+where order_purchase_timestamp is null
+
+select order_approved_at from bronze.olist_orders --nulls
+where order_approved_at is null
+
+select order_delivered_carrier_date from bronze.olist_orders --nulls
+where order_delivered_carrier_date is null
+
+select order_delivered_customer_date from bronze.olist_orders --nulls
+where order_delivered_customer_date is null
+
+select order_estimated_delivery_date from bronze.olist_orders
+where  order_estimated_delivery_date is null
+
+
+select order_id , customer_id from bronze.olist_orders
+where order_id !=trim(order_id)or
+      customer_id!=trim(customer_id) or
+      order_status!=trim(order_status)
+
+select distinct order_status from bronze.olist_orders
+
+--*******************************************************************************************************************************************
+--check bronze.olist_order_payments
+select * from bronze.olist_order_payments
+
+select order_id,count(*) from bronze.olist_order_payments
+group by order_id
+having count(*)>1 or order_id is null
+
+select payment_sequential from bronze.olist_order_payments
+where payment_sequential is null
+
+select payment_type from bronze.olist_order_payments
+where payment_type is null
+
+select payment_installments from bronze.olist_order_payments
+where payment_installments is null
+
+select payment_value from bronze.olist_order_payments
+where payment_value is null
+
+select order_id , payment_type from bronze.olist_order_payments
+where order_id !=trim(order_id)or
+      payment_type!=trim(payment_type) 
+
+select distinct payment_type from bronze.olist_order_payments
+
+SELECT -- check pk duplicates 
+    order_id,
+    payment_sequential,
+    COUNT(*) AS duplicate_count
+FROM bronze.olist_order_payments
+GROUP BY
+    order_id,
+   payment_sequential
+HAVING COUNT(*) > 1;
+
+--****************************************************************************************************************************************
+--check bronze.olist_products
+select * from bronze.olist_products
+
+select product_id,count(*) from bronze.olist_products
+group by product_id
+having count(*)>1 or product_id is null
+
+select product_category_name from bronze.olist_products
+where product_category_name is null
+
+select product_name_lenght from bronze.olist_products
+where product_name_lenght is null
+
+select product_description_lenght from bronze.olist_products
+where product_description_lenght is null
+
+select product_photos_qty from bronze.olist_products
+where product_photos_qty is null
+
+select product_weight_g from bronze.olist_products
+where product_weight_g is null
+
+select product_length_cm from bronze.olist_products
+where product_length_cm is null
+
+select product_height_cm from bronze.olist_products
+where product_height_cm is null
+
+select product_width_cm from bronze.olist_products
+where product_width_cm is null
+-- no nulls or duplicates
+
+select product_id , product_category_name  from bronze.olist_products
+where product_id !=trim(product_id)or
+      product_category_name!=trim(product_category_name)
+
+select distinct product_category_name from bronze.olist_products
+
+--check silver.olist_products
+select * from silver.olist_products 
+
+select product_category_name from silver.olist_products
+where product_category_name is null
+
+select product_name_lenght from silver.olist_products
+where product_name_lenght is null
+
+select product_description_lenght from silver.olist_products
+where product_description_lenght is null
+
+select product_photos_qty from silver.olist_products
+where product_photos_qty is null
+
+select product_weight_g from silver.olist_products
+where product_weight_g is null
+
+select product_length_cm from silver.olist_products
+where product_length_cm is null
+
+select product_height_cm from silver.olist_products
+where product_height_cm is null
+
+select product_width_cm from silver.olist_products
+where product_width_cm is null
+
+--**************************************************************************************************************************************
+--check bronze.olist_sellers
+select * from bronze.olist_sellers
+
+select seller_id,count(*) from bronze.olist_sellers
+group by seller_id
+having count(*)>1 or seller_id is null
+
+select seller_zip_code_prefix from bronze.olist_sellers
+where seller_zip_code_prefix is null
+
+select seller_city from bronze.olist_sellers
+where seller_city is null
+
+select seller_state from bronze.olist_sellers
+where seller_state is null
+
+-- no nulls or duplicates
+
+select seller_id , seller_zip_code_prefix ,seller_city,seller_state from bronze.olist_sellers
+where seller_id !=trim(seller_id)or
+      seller_zip_code_prefix!=trim(seller_zip_code_prefix)or
+      seller_city!=trim(seller_city)or
+      seller_state!=trim(seller_state)
+
+select distinct seller_state from bronze.olist_sellers
+
