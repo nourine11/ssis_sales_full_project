@@ -1,0 +1,9 @@
+create database ssis_project
+
+create schema bronze
+go
+
+create schema silver
+go
+
+create schems gold 
