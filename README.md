@@ -84,8 +84,9 @@ The data is organized into:
 * Dimension Tables → descriptive information used to analyze the facts
 
 The Gold layer is intended to support analytical queries and future BI/reporting use cases.
-![Olist Architecture](screenshots/architecture/olist_architecture.png)
-![Olist Architecture](screenshots/architecture/olist_architecture.png)
+![gold_layer](gold_layer.png)
+
+![dim_orders](dim_orders.png)
 ## 🗂️ Dataset
 
 The project uses the Brazilian E-Commerce Public Dataset by Olist.
