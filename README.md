@@ -87,6 +87,8 @@ The Gold layer is intended to support analytical queries and future BI/reporting
 ![gold_layer](gold_layer.png)
 
 ![dim_orders](dim_orders.png)
+
+![facts](facts.png)
 ## 🗂️ Dataset
 
 The project uses the Brazilian E-Commerce Public Dataset by Olist.
