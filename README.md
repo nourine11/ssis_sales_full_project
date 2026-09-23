@@ -50,7 +50,9 @@ It contains the main Olist entities, including:
 * Product Category Translation
 
 The purpose of this layer is to preserve the source data before applying business transformations.
-![Olist Architecture](screenshots/architecture/olist_architecture.png)
+![bronze_layer](bronze_layer.png)
+
+![bronze_customer](bronze_customer.png)
 ## 🥈 Silver Layer
 
 The Silver layer contains cleaned and standardized data.
@@ -68,7 +70,9 @@ Transformations performed include:
 * Validating duplicates and key relationships
 
 The Silver layer is designed to provide reliable and consistent data for downstream analytical processing.
-![Olist Architecture](screenshots/architecture/olist_architecture.png)
+![silver_layer](silver_layer.png)
+
+![silver_sellers](silver_sellers.png)
 
 ## 🥇 Gold Layer
 
